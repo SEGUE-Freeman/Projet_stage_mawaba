@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mawaba V2 | Générateur de Cadrage IA</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Mawaba <span style="opacity: 0.5;">V2</span></h1>
+            <p class="subtitle">Générez instantanément vos documents de cadrage, planning, budget et architecture
+                interactive.</p>
+        </header>
+
+        <main>
+            <!-- Form Card -->
+            <section id="form-container" class="card">
+                <form id="generator-form">
+                    <div class="form-group">
+                        <label for="titre">Titre du Projet</label>
+                        <input type="text" id="titre" name="titre" placeholder="Ex: Système de RAG Interne" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="3"
+                            placeholder="Décrivez l'objectif principal..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contexte">Contexte & Enjeux</label>
+                        <textarea id="contexte" name="contexte" rows="3"
+                            placeholder="Pourquoi ce projet ? Quelles sont les contraintes ?" required></textarea>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="echeancier">Échéancier</label>
+                            <input type="text" id="echeancier" name="echeancier" placeholder="Ex: 3 mois" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget_max">Budget Max Suggéré</label>
+                            <input type="text" id="budget_max" name="budget_max" placeholder="Ex: 50,000 €" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" id="submit-btn">
+                        <span>Lancer la Génération</span>
+                        <i class="fas fa-magic" style="margin-left: 0.5rem;"></i>
+                    </button>
+                </form>
+
+                <!-- Loading State -->
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p id="loading-text">Analyse du projet et génération des livrables...</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Veuillez patienter un
+                        instant...</p>
+                </div>
+            </section>
+
+            <!-- Success Message (Hidden) -->
+            <section id="success-header" style="display: none; text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2rem;">Livrables Prêts !</h2>
+                <p class="subtitle">Tous les documents ont été générés et sont prêts pour le téléchargement.</p>
+                <button class="btn" style="width: auto; padding: 0.6rem 1.5rem; font-size: 0.9rem; margin-top: 1rem;"
+                    onclick="location.reload()">Nouveau Projet</button>
+            </section>
+
+            <!-- Results Grid -->
+            <div id="results-grid" class="results-grid">
+                <!-- Word Doc: Fonctionnel -->
+                <div class="result-card">
+                    <i class="far fa-file-word" style="color: #2b579a;"></i>
+                    <h3>Doc Fonctionnel</h3>
+                    <p>Cahier des charges, besoins et spécifications détaillées.</p>
+                    <a href="#" id="link-fonctionnel" class="btn" target="_blank">Télécharger .docx</a>
+                </div>
+
+                <!-- Word Doc: Tech -->
+                <div class="result-card">
+                    <i class="fas fa-microchip" style="color: #10b981;"></i>
+                    <h3>Note Technique</h3>
+                    <p>Architecture IA, besoins data et sécurité.</p>
+                    <a href="#" id="link-technique" class="btn" target="_blank">Télécharger .docx</a>
+                </div>
+
+                <!-- Word Doc: Budget -->
+                <div class="result-card">
+                    <i class="fas fa-calendar-alt" style="color: #f59e0b;"></i>
+                    <h3>Budget & Planning</h3>
+                    <p>Phasage temporel et estimation budgétaire détaillée.</p>
+                    <a href="#" id="link-budget_planning" class="btn" target="_blank">Télécharger .docx</a>
+                </div>
+
+                <!-- Excel Doc: Jira -->
+                <div class="result-card">
+                    <i class="far fa-file-excel" style="color: #217346;"></i>
+                    <h3>Jira Export (Excel)</h3>
+                    <p>User Stories et sous-tâches structurées pour import.</p>
+                    <a href="#" id="link-excel" class="btn" target="_blank">Télécharger .xlsx</a>
+                </div>
+
+                <!-- HTML Doc: Architecture -->
+                <div class="result-card"
+                    style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
+                    <i class="fas fa-project-diagram" style="color: #a855f7;"></i>
+                    <h3>Architecture Interactive</h3>
+                    <p>Diagramme de flux généré dynamiquement.</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" id="link-html" class="btn" target="_blank" download="05_Architecture.html"
+                            style="width: auto; padding: 0.6rem 1.5rem;">
+                            <i class="fas fa-download" style="margin-right: 0.5rem;"></i> Télécharger .html
+                        </a>
+                    </div>
+                    <div id="iframe-container"
+                        style="width: 100%; height: 500px; background: white; border-radius: 12px; margin-top: 1.5rem; overflow: hidden; display: none; width: 100%; border: 1px solid var(--border-color);">
+                        <iframe id="iframe-html" style="width: 100%; height: 100%; border: none;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer style="margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+            &copy; 2026 Mawaba Technologies
+        </footer>
+    </div>
+
+    <!-- JS -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

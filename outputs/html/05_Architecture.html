@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture — ARCEP AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                'primaryColor': '#38bdf8',
+                'primaryTextColor': '#0f172a',
+                'primaryBorderColor': '#1e293b',
+                'lineColor': '#64748b',
+                'secondaryColor': '#e2e8f0',
+                'tertiaryColor': '#f8fafc',
+                'fontSize': '14px',
+                'fontFamily': 'Inter, sans-serif'
+            },
+            securityLevel: 'loose'
+        });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                        0 0 80px -20px rgba(56, 189, 248, 0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #f8fafc;
+            letter-spacing: -0.025em;
+        }
+        .header-left p {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+        .badge {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .mermaid-wrapper {
+            background: rgba(255, 255, 255, 0.97);
+            padding: 40px;
+            border-radius: 16px;
+            margin-top: 16px;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+        }
+        .mermaid {
+            text-align: center;
+        }
+        .footer {
+            margin-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="header-left">
+                    <h1>🏗️ Architecture Technique</h1>
+                    <p>ARCEP AI</p>
+                </div>
+                <span class="badge">Mawaba AI</span>
+            </div>
+            <div class="mermaid-wrapper">
+                <div class="mermaid">
+graph TD
+  A["Client Web"] --> B["API Gateway"]
+  B --> C["Backend Service"]
+  C --> D["Base de données"]
+  C --> E["Service IA"]
+  E --> F["LLM API"]
+  E --> G["Vector Store"]
+                </div>
+            </div>
+            <div class="footer">
+                <span>Généré automatiquement par Mawaba AI</span>
+                <span>Document Confidentiel — © 2025</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
